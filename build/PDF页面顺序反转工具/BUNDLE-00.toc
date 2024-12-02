@@ -1,0 +1,3 @@
+([('PDF页面顺序反转工具',
+   '/Users/syw/project/python-learning/dist/PDF页面顺序反转工具',
+   'EXECUTABLE')],)
