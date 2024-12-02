@@ -1,1 +1,17 @@
- 
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
+# 安装Python
+RUN powershell -Command \
+    Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe -OutFile python-installer.exe ; \
+    Start-Process python-installer.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -Wait ; \
+    Remove-Item python-installer.exe
+
+# 安装依赖
+RUN pip install PyPDF2 pyinstaller
+
+# 复制源代码
+COPY . /app
+WORKDIR /app
+
+# 运行打包命令
+CMD pyinstaller --name="PDF页面顺序反转工具" --windowed --onefile --clean 124.py 
